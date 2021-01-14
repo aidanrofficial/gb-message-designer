@@ -50,7 +50,7 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "GB Message Designer", wxPoint(200, 20
 	editMenu->Enable(wxID_UNDO, false);
 	editMenu->Enable(wxID_REDO, false);
 
-	messagePanel = new MessagePanel(this, wxID_ANY, 0, editMenu, &this->edited);
+	messagePanel = new MessagePanel(this, wxID_ANY, 0, editMenu, &this->edited, this);
 }
 
 Main::~Main()

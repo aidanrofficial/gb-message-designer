@@ -14,11 +14,14 @@
 #define KEY_Z 122
 #define KEY_CONTROL_Z 26
 #define KEY_CONTROL_Y 25
+#define KEY_CONTROL_S 19
+
+class Main;
 
 class MessagePanel : public wxPanel
 {
 public:
-	MessagePanel(wxWindow* parent, wxWindowID id, int rows, wxMenu* editMenu, bool* edited);
+	MessagePanel(wxWindow* parent, wxWindowID id, int rows, wxMenu* editMenu, bool* edited, Main* main);
 	~MessagePanel();
 
 	void AddChar(char character);
@@ -41,6 +44,8 @@ public:
 	wxStaticText** characters;
 	int rows = 8;
 	bool* edited = nullptr;
+
+	Main* main = nullptr;
 
 	CMAN::CommandManager<CMAN::Command> commandManager;
 

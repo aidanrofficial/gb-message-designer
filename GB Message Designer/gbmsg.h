@@ -226,23 +226,23 @@ public:
 			case 'Q':
 				return "0xEF";
 			case 'R':
-				return "0xF1";
+				return "0xF0";
 			case 'S':
-				return "0xF2";
+				return "0xF1";
 			case 'T':
-				return "0xF3";
+				return "0xF2";
 			case 'U':
-				return "0xF4";
+				return "0xF3";
 			case 'V':
-				return "0xF5";
+				return "0xF4";
 			case 'W':
-				return "0xF6";
+				return "0xF5";
 			case 'X':
-				return "0xF7";
+				return "0xF6";
 			case 'Y':
-				return "0xF8";
+				return "0xF7";
 			case 'Z':
-				return "0xF9";
+				return "0xF8";
 			case 'a':
 				return "0xBA";
 			case 'b':

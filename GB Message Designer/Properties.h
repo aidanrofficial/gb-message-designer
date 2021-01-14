@@ -1,3 +1,5 @@
+#ifndef _PROPERTIES_H_
+#define _PROPERTIES_H_
 #pragma once
 #include "wx/wx.h"
 #include "wx/wxprec.h"
@@ -21,3 +23,4 @@ public:
 	wxDECLARE_EVENT_TABLE();
 };
 
+#endif

@@ -1,15 +1,17 @@
 #include "MessagePanel.h"
+#include "Main.h"
 #include "iostream"
 
 BEGIN_EVENT_TABLE(MessagePanel, wxPanel)
    EVT_GRID_RANGE_SELECT(MessagePanel::OnSelect)
 END_EVENT_TABLE()
 
-MessagePanel::MessagePanel(wxWindow* parent, wxWindowID id, int rows, wxMenu* editMenu, bool* edited) : wxPanel(parent, id, wxDefaultPosition, wxDefaultSize, wxWANTS_CHARS)
+MessagePanel::MessagePanel(wxWindow* parent, wxWindowID id, int rows, wxMenu* editMenu, bool* edited, Main* main) : wxPanel(parent, id, wxDefaultPosition, wxDefaultSize, wxWANTS_CHARS)
 {
 	this->rows = rows;
 	this->editMenu = editMenu;
 	this->edited = edited;
+	this->main = main;
 
 	characters = new wxStaticText*[1];
 
@@ -82,6 +84,10 @@ void MessagePanel::RemoveChar()
 
 	grid->SetCellValue(cursorRow, cursorCol, ' ');
 
+	char tempChar = ' ';
+
+	message->replace(charPos, 1, tempChar);
+
 	if(cursorCol == 0 && cursorRow > 0)
 	{
 		grid->SetGridCursor(cursorRow, 17);
@@ -121,6 +127,11 @@ void MessagePanel::OnKeyDown(wxKeyEvent& event)
 		if(keyCode == KEY_CONTROL_Y)
 		{
 			commandManager.Redo();
+		}
+
+		if(keyCode == KEY_CONTROL_S)
+		{
+			main->SaveFile();
 		}
 
 		if(commandManager.CanUndo())

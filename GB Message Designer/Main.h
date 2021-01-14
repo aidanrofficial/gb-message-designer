@@ -1,3 +1,5 @@
+#ifndef _MAIN_H_
+#define _MAIN_H_
 #pragma once
 #include "wx/wx.h"
 #include "MessagePanel.h"
@@ -7,6 +9,7 @@
 #include <fstream>
 
 using namespace std;
+
 class Main : public wxFrame
 {
 public:
@@ -52,3 +55,5 @@ public:
 
 	wxDECLARE_EVENT_TABLE();
 };
+
+#endif
