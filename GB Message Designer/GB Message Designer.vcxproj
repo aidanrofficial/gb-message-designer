@@ -34,6 +34,9 @@
     <ClCompile Include="MessagePanel.cpp" />
     <ClCompile Include="Properties.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="Game_Boy.ico" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

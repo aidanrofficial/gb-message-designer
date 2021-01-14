@@ -18,6 +18,8 @@ wxEND_EVENT_TABLE()
 
 Main::Main() : wxFrame(nullptr, wxID_ANY, "GB Message Designer", wxPoint(200, 200), wxSize(603, 350), wxWANTS_CHARS | wxDEFAULT_FRAME_STYLE)
 {
+	this->SetIcon(wxIcon(wxT("Game_Boy.ico"), wxBITMAP_TYPE_ICO));
+
 	menuBar = new wxMenuBar();
 	fileMenu = new wxMenu();
 	editMenu = new wxMenu();
