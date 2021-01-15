@@ -51,10 +51,68 @@ Main::Main() : wxFrame(nullptr, wxID_ANY, "GB Message Designer", wxPoint(200, 20
 	editMenu->Enable(wxID_REDO, false);
 
 	messagePanel = new MessagePanel(this, wxID_ANY, 0, editMenu, &this->edited, this);
+
+	wxMessageBox(wxString::Format("Directory: %s", GetDirectory()));
 }
 
 Main::~Main()
 {
+}
+
+bool Main::SetDirectory(string filePath)
+{
+	int endCount;
+	string tempPath;
+
+	for(int i = filePath.size() - 1; i > 0; i--)
+	{
+		if(filePath[i] == '\\')
+		{
+			endCount = i;
+			break;
+		}
+	}
+
+	for(int i = 0 ; i < endCount; i++)
+	{
+		tempPath.append(filePath, i, 1);
+	}
+
+	ofstream gbmdINIFile("gbmd.ini");
+
+	gbmdINIFile << "[General]" << endl;
+
+	gbmdINIFile << "GBMDPath=";
+	gbmdINIFile << tempPath;
+
+	gbmdINIFile.close();
+}
+
+string Main::GetDirectory()
+{
+	ifstream gbmdINIFile("gbmd.ini");
+	string tempLine;
+	string tempPath;
+
+	if(gbmdINIFile.is_open())
+	{
+		while(std::getline(gbmdINIFile, tempLine))
+		{
+			if(tempLine.find("GBMDPath=") != string::npos)
+			{
+				for(int i = 9; i < (int)tempLine.size(); i++)
+				{
+					tempPath.append(tempLine, i, 1);
+				}
+
+				return tempPath;
+			}
+		}
+	}
+
+	gbmdINIFile.close();
+
+	return "";
 }
 
 bool Main::SaveFile()
@@ -158,7 +216,11 @@ void Main::SaveFileAs()
 
 void Main::OpenFile()
 {
-	wxFileDialog fileDialog(this, "Open Message File", "", "", "*.gbmsg Files (*.gbmsg)|*gbmsg", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
+	string tempDirectory = GetDirectory();
+
+	wxMessageBox(wxString::Format("Directory: %s", tempDirectory));
+
+	wxFileDialog fileDialog(this, "Open Message File", tempDirectory, "", "*.gbmsg Files (*.gbmsg)|*gbmsg", wxFD_OPEN | wxFD_FILE_MUST_EXIST);
 	ifstream file;
 
 	if(fileDialog.ShowModal() == wxID_OK)
@@ -190,6 +252,8 @@ void Main::OpenFile()
 			this->SetTitle(wxString::Format("GB Message Designer - %s", GetNameFromPath(tempPath)));
 
 			edited = false;
+
+			SetDirectory(tempPath);
 		}
 		else
 		{

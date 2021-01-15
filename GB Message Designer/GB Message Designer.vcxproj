@@ -26,7 +26,6 @@
     <ClInclude Include="Main.h" />
     <ClInclude Include="MessagePanel.h" />
     <ClInclude Include="Properties.h" />
-    <ClInclude Include="resource.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="App.cpp" />

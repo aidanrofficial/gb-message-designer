@@ -16,6 +16,10 @@ public:
 	Main();
 	~Main();
 
+	bool SetDirectory(string path);
+
+	string GetDirectory();
+
 	bool SaveFile();
 	void SaveFileAs();
 	void OpenFile();

@@ -33,7 +33,25 @@ Export::Export(wxWindow* parent, std::string* exportPath, int rows, string messa
 
 void Export::Browse(wxCommandEvent &evt)
 {
-	wxFileDialog fileDialog(this, "Export Message File", "", ".c", "*.c Files (*.c)|*c", wxFD_SAVE);
+	string tempDirectory;
+	string tempPath = fileText->GetValue().ToStdString();
+	int endCount;
+
+	for(int i = tempPath.size() - 1; i > 0; i--)
+	{
+		if(tempPath[i] == '\\')
+		{
+			endCount = i;
+			break;
+		}
+	}
+
+	for(int i = 0 ; i < endCount; i++)
+	{
+		tempDirectory.append(tempPath, i, 1);
+	}
+
+	wxFileDialog fileDialog(this, "Export Message File", tempDirectory, ".c", "*.c Files (*.c)|*c", wxFD_SAVE);
 	
 	if(fileDialog.ShowModal() == wxID_OK)
 	{
